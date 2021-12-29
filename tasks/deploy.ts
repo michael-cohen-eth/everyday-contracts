@@ -41,6 +41,18 @@ task("deploy-verify", "Deploys and verifies a contract")
     });
   });
 
+task("deploy", "Deploys a contract")
+  .addOptionalParam(
+    "withMainAccount",
+    "[Optional] Use the main deployer account",
+    false,
+    types.boolean
+  )
+  .setAction(async function (taskArguments, hre) {
+    await hre.run("deploy", { withMainAccount: taskArguments.withMainAccount });
+    const address = getEnvVariable("NFT_CONTRACT_ADDRESS")!;
+    console.log(`Contract deployed to address: ${address}`);
+  });
 subtask("deploy", "Deploys the contract")
   .addOptionalParam(
     "withMainAccount",

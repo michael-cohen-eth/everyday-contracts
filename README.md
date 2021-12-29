@@ -20,7 +20,7 @@ Generating typings for: 13 artifacts in dir: typechain for target: ethers-v5
 Successfully generated 19 typings!
 Compilation finished successfully
 ...
-$ npx hardhat deploy --network rinkeby --with-main-account true
+$ npx hardhat deploy-verify --network rinkeby --with-main-account true
 Deploying EverydaysTwo...
 ========= NOTICE =========
 Request-Rate Exceeded  (this message will not be repeated)
@@ -34,19 +34,9 @@ request rate/limit and enable other perks, such as metrics and advanced APIs.
 
 For more details: https://docs.ethers.io/api-keys/
 ==========================
-Contract deployed to address: 0xA339738C75bDbC7b6fb3DA37818cD6fAECd5DBf3
-
-...
-
-$ npx hardhat verify 0xA339738C75bDbC7b6fb3DA37818cD6fAECd5DBf3 --network rinkeby
-Nothing to compile
-No need to generate any newer typings.
-Compiling 1 file with 0.8.4
-Successfully submitted source code for contract
-contracts/Contract.sol:EverydaysTwo at 0xA339738C75bDbC7b6fb3DA37818cD6fAECd5DBf3
-for verification on Etherscan. Waiting for verification result...
-
-Successfully verified contract NFT on Etherscan.
-https://rinkeby.etherscan.deth.net/address/0xA339738C75bDbC7b6fb3DA37818cD6fAECd5DBf3#code
+Contract deployed to address: 0xed90BD29c80326b55b89065Eb5a807FA5719Ba0b
+Contract address: 0xed90BD29c80326b55b89065Eb5a807FA5719Ba0b
+Error in plugin @nomiclabs/hardhat-etherscan: The address 0xed90BD29c80326b55b89065Eb5a807FA5719Ba0b has no bytecode. Is the contract deployed to this network?
+The selected network is rinkeby.
 ```
 
