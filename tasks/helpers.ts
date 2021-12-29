@@ -23,10 +23,18 @@ export const getProvider = (): ethers.providers.Provider => {
   });
 };
 
-// Helper method for fetching a wallet account using an environment variable for the PK
-export const getAccount = (): ethers.Wallet => {
+// Helper method for fetching a testing deployer account
+export const getTestingAccount = (): ethers.Wallet => {
   return new ethers.Wallet(
-    getEnvVariable("ACCOUNT_PRIVATE_KEY")!,
+    getEnvVariable("TESTING_ACCOUNT_PRIVATE_KEY")!,
+    getProvider()
+  );
+};
+
+// Helper method for fetching the main deployer account
+export const getMainAccount = (): ethers.Wallet => {
+  return new ethers.Wallet(
+    getEnvVariable("MAIN_ACCOUNT_PRIVATE_KEY")!,
     getProvider()
   );
 };
@@ -34,9 +42,13 @@ export const getAccount = (): ethers.Wallet => {
 // Helper method for fetching a contract instance at a given address
 export const getContract = (
   hre: HardhatRuntimeEnvironment,
-  contractName?: string
+  contractName?: string,
+  mainAccount?: boolean
 ): Promise<Contract> => {
-  const account = getAccount();
+  let account = getTestingAccount();
+  if (mainAccount) {
+    account = getMainAccount();
+  }
   return getContractAt(
     hre,
     contractName || getContractName(),

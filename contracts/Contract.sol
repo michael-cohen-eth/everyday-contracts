@@ -3,9 +3,9 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "@divergencetech/ethier/contracts/erc721/OpenSeaGasFreeListing.sol";
+import "@divergencetech/ethier/contracts/thirdparty/opensea/OpenSeaGasFreeListing.sol";
 
-contract DayTwo is ERC721 {
+contract EverydaysTwo is ERC721 {
     using Counters for Counters.Counter;
     // Price to mint a new token
     uint256 public constant MINT_PRICE = 0.08 ether;
@@ -18,7 +18,7 @@ contract DayTwo is ERC721 {
      */ 
     Counters.Counter private _nextTokenId;
 
-    constructor() ERC721("DayTwo", "DayTwo") {
+    constructor() ERC721("EverydaysTwo", "ED2") {
         // nextTokenId is initialized to 1, since starting at 0 leads to higher gas cost for the first minter
         _nextTokenId.increment();
     }

@@ -11,8 +11,13 @@ import "./tasks/mint";
 
 dotenv.config();
 
-const { ALCHEMY_KEY, ACCOUNT_PRIVATE_KEY, ETHERSCAN_API_KEY, REPORT_GAS } =
-  process.env;
+const {
+  ALCHEMY_KEY,
+  TESTING_ACCOUNT_PRIVATE_KEY,
+  MAIN_ACCOUNT_PRIVATE_KEY,
+  ETHERSCAN_API_KEY,
+  REPORT_GAS,
+} = process.env;
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -33,12 +38,18 @@ const config: HardhatUserConfig = {
   networks: {
     rinkeby: {
       url: `https://eth-rinkeby.alchemyapi.io/v2/${ALCHEMY_KEY}`,
-      accounts: [`0x${ACCOUNT_PRIVATE_KEY}`],
+      accounts: [
+        `0x${TESTING_ACCOUNT_PRIVATE_KEY}`,
+        `0x${MAIN_ACCOUNT_PRIVATE_KEY}`,
+      ],
     },
     ethereum: {
       chainId: 1,
       url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_KEY}`,
-      accounts: [`0x${ACCOUNT_PRIVATE_KEY}`],
+      accounts: [
+        `0x${TESTING_ACCOUNT_PRIVATE_KEY}`,
+        `0x${MAIN_ACCOUNT_PRIVATE_KEY}`,
+      ],
     },
   },
   gasReporter: {

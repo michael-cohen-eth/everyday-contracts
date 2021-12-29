@@ -2,7 +2,7 @@
   "name": "hardhat-project",
   "dependencies": {
     "@openzeppelin/contracts": "^4.4.0",
-    "@divergencetech/ethier": "^0.8.2"
+    "@divergencetech/ethier": "^0.14.1"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.3",
