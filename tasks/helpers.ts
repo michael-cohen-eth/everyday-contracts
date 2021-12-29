@@ -33,21 +33,18 @@ export const getAccount = (): ethers.Wallet => {
 
 // Helper method for fetching a contract instance at a given address
 export const getContract = (
-  contractName: string,
-  hre: HardhatRuntimeEnvironment
+  hre: HardhatRuntimeEnvironment,
+  contractName?: string
 ): Promise<Contract> => {
   const account = getAccount();
   return getContractAt(
     hre,
-    contractName,
+    contractName || getContractName(),
     getEnvVariable("NFT_CONTRACT_ADDRESS")!,
     account
   );
 };
 
-// export default {
-//   getEnvVariable,
-//   getProvider,
-//   getAccount,
-//   getContract,
-// };
+export const getContractName = (): string => {
+  return getEnvVariable("CONTRACT_NAME")!;
+};

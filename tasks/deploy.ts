@@ -1,5 +1,5 @@
 import { task } from "hardhat/config";
-import { getAccount } from "./helpers";
+import { getAccount, getContractName } from "./helpers";
 
 task("check-balance", "Prints out the balance of your account").setAction(
   async function (taskArguments, hre) {
@@ -15,7 +15,7 @@ task("deploy", "Deploys the NFT.sol contract").setAction(async function (
   hre
 ) {
   const nftContractFactory = await hre.ethers.getContractFactory(
-    "NFT",
+    getContractName(),
     getAccount()
   );
   const nft = await nftContractFactory.deploy();
