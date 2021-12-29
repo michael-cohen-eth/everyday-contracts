@@ -3,11 +3,12 @@ Trying to deploy and verify a new contract every day (on Rinkeby lol) to improve
 
 Every day is a new branch.
 
-# The contract
-- This first contract is a REAAALLLLYYY simple ERC721 implementation
-- I wanted to keep day 1 simple to make future days easier to build on top of this one.
+# The contract - Day 2
+- I wanted this contract to be a simple improvement over day 1's contract:
+	- This includes mint limitations (a total supply) and a mint price.
+	- It also includes the [ethier](https://github.com/divergencetech/ethier) library's OpenSeaGasFreeListing override for easier listings on OpenSea.
 
-#### Contract Address: [0x4e6d5620C4ade12D52f833DB2D9c7874bAbEbd7e](https://rinkeby.etherscan.io/address/0x4e6d5620C4ade12D52f833DB2D9c7874bAbEbd7e)
+#### Contract Address: [0xA339738C75bDbC7b6fb3DA37818cD6fAECd5DBf3](https://rinkeby.etherscan.io/address/0xA339738C75bDbC7b6fb3DA37818cD6fAECd5DBf3)
 # Commands run
 ```
 $ npm install --save-dev hardhat
@@ -19,7 +20,8 @@ Generating typings for: 13 artifacts in dir: typechain for target: ethers-v5
 Successfully generated 19 typings!
 Compilation finished successfully
 ...
-$ npx hardhat deploy
+$ npx hardhat deploy --network rinkeby --with-main-account true
+Deploying EverydaysTwo...
 ========= NOTICE =========
 Request-Rate Exceeded  (this message will not be repeated)
 
@@ -32,19 +34,19 @@ request rate/limit and enable other perks, such as metrics and advanced APIs.
 
 For more details: https://docs.ethers.io/api-keys/
 ==========================
-Contract deployed to address: 0x4e6d5620C4ade12D52f833DB2D9c7874bAbEbd7e
+Contract deployed to address: 0xA339738C75bDbC7b6fb3DA37818cD6fAECd5DBf3
 
 ...
 
-$ npx hardhat verify 0x4e6d5620C4ade12D52f833DB2D9c7874bAbEbd7e --network rinkeby
+$ npx hardhat verify 0xA339738C75bDbC7b6fb3DA37818cD6fAECd5DBf3 --network rinkeby
 Nothing to compile
 No need to generate any newer typings.
 Compiling 1 file with 0.8.4
 Successfully submitted source code for contract
-contracts/NFT.sol:NFT at 0x4e6d5620C4ade12D52f833DB2D9c7874bAbEbd7e
+contracts/Contract.sol:EverydaysTwo at 0xA339738C75bDbC7b6fb3DA37818cD6fAECd5DBf3
 for verification on Etherscan. Waiting for verification result...
 
 Successfully verified contract NFT on Etherscan.
-https://rinkeby.etherscan.deth.net/address/0x4e6d5620C4ade12D52f833DB2D9c7874bAbEbd7e#code
+https://rinkeby.etherscan.deth.net/address/0xA339738C75bDbC7b6fb3DA37818cD6fAECd5DBf3#code
 ```
 
