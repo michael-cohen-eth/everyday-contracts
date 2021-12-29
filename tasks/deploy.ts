@@ -1,5 +1,11 @@
-import { task, types } from "hardhat/config";
-import { getMainAccount, getContractName, getTestingAccount } from "./helpers";
+import { subtask, task, types } from "hardhat/config";
+import {
+  getMainAccount,
+  getContractName,
+  getTestingAccount,
+  setEnvVariable,
+  getEnvVariable,
+} from "./helpers";
 
 task("check-balance", "Prints out the balance of your account")
   .addOptionalParam(
@@ -10,7 +16,7 @@ task("check-balance", "Prints out the balance of your account")
   )
   .setAction(async function (taskArguments, hre) {
     let account = getTestingAccount();
-    if (taskArguments.main_account) {
+    if (taskArguments.withMainAccount) {
       account = getMainAccount();
     }
     console.log(
@@ -18,7 +24,24 @@ task("check-balance", "Prints out the balance of your account")
     );
   });
 
-task("deploy", "Deploys the contract")
+task("deploy-verify", "Deploys and verifies a contract")
+  .addOptionalParam(
+    "withMainAccount",
+    "[Optional] Use the main deployer account",
+    false,
+    types.boolean
+  )
+  .setAction(async function (taskArguments, hre) {
+    await hre.run("deploy", { withMainAccount: taskArguments.withMainAccount });
+    const address = getEnvVariable("NFT_CONTRACT_ADDRESS")!;
+    console.log(`Contract deployed to address: ${address}`);
+    console.log(`Verifying contract...`);
+    await hre.run("verify:verify", {
+      address: address,
+    });
+  });
+
+subtask("deploy", "Deploys the contract")
   .addOptionalParam(
     "withMainAccount",
     "[Optional] Use the main deployer account",
@@ -28,7 +51,7 @@ task("deploy", "Deploys the contract")
   .setAction(async function (taskArguments, hre) {
     const name = getContractName();
     let account = getTestingAccount();
-    if (taskArguments.main_account) {
+    if (taskArguments.withMainAccount) {
       account = getMainAccount();
     }
     const nftContractFactory = await hre.ethers.getContractFactory(
@@ -37,5 +60,5 @@ task("deploy", "Deploys the contract")
     );
     console.log(`Deploying ${name}...`);
     const nft = await nftContractFactory.deploy();
-    console.log(`Contract deployed to address: ${nft.address}`);
+    setEnvVariable("NFT_CONTRACT_ADDRESS", nft.address);
   });

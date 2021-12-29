@@ -16,6 +16,10 @@ export const getEnvVariable = (
   return defaultValue;
 };
 
+export const setEnvVariable = (key: string, value: string) => {
+  process.env[key] = value;
+};
+
 // Helper method for fetching a connection provider to the Ethereum network
 export const getProvider = (): ethers.providers.Provider => {
   return ethers.getDefaultProvider(getEnvVariable("NETWORK", "rinkeby"), {
